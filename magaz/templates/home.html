@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <title>LENDORADO</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+
+	<content>
+
+		{% for product in products %}
+
+            <p>{{ product }}</p>
+
+        {% endfor %}
+        
+    </content>
+
+    {% include 'footer.html' %}
+</body>
+</html>

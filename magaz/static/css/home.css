@@ -1,0 +1,26 @@
+@font-face {
+	font-family: Montserrat-Light;
+	src: url('font-family/Montserrat-Light.ttf');
+}
+
+body {
+	background-color: #F4F3F8; 
+	font-family: Montserrat-Light; 
+	display: grid;
+	grid-template-areas:
+		"nav nav"
+		"content content"
+		"footer footer";
+}
+
+nav {
+	grid-area: nav;
+}
+
+content {
+	grid-area: content;
+}
+
+footer {
+	grid-area: footer;
+}

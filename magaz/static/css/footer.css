@@ -1,0 +1,10 @@
+footer {
+	background-color: #E9E9E9;
+	margin-left: -8px;
+	margin-right: -8px;
+	min-height: 110%;
+}
+
+footer h1 {
+	text-align: center;
+}
