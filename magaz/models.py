@@ -18,6 +18,25 @@ os_smartphone = (
 )
 
 
+class ProductManager:
+
+	@staticmethod
+	def manager(*args, **kwargs):
+		with_respect_to = kwargs.get('with_respect_to')
+		products = []
+		ct_models = ContentType.objects.filter(model__in=args)
+		for ct_model in ct_models:
+			model_products = ct_model.model_class()._base_manager.all().order_by('-id')[:5]
+			products.extend(model_products)
+		if with_respect_to:
+			ct_model = ContentType.objects.filter(model=with_respect_to)
+			if ct_model.exists():
+				if with_respect_to in args:
+					return sorted(
+						products, key=lambda x: x.__class__._meta.model_name.startswith(with_respect_to), reverse=True
+					)
+		return products
+
 class Category(models.Model):
 	name = models.CharField(max_length=60, verbose_name='Название')
 	slug = models.SlugField(unique=True)
@@ -51,14 +70,15 @@ class Product(models.Model):
 	col_product = models.IntegerField(default=0, verbose_name='Кол. товаров')
 	under_category = models.ForeignKey(UnderCategory, on_delete=models.CASCADE)
 	brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+	sale = models.BooleanField(default=False, verbose_name='Скидка')
 
 	class Meta:
 		abstract = True
 
 
 class Smartphone(Product):
-	os = models.CharField(max_length=100, verbose_name='Операционная система', choices=os_smartphone)
-	cores = models.IntegerField(default=0, verbose_name='Количество ядер')
+	os = models.CharField(max_length=100, blank=True, verbose_name='Операционная система', choices=os_smartphone)
+	cores = models.IntegerField(default=0, blank=True, verbose_name='Количество ядер')
 	ram = models.IntegerField(default=0, verbose_name='Оперативная память')
 	memory = models.IntegerField(default=0, verbose_name='Встроенная память')
 	bluetooth = models.BooleanField(default=True, verbose_name='Bluetooth')

@@ -1,17 +1,10 @@
-@font-face {
-	font-family: Montserrat-Light;
-	src: url('font-family/Montserrat-Light.ttf');
-}
-
-body {
-	background-color: #F4F3F8; 
-	font-family: Montserrat-Light; 
+body { 
 	display: grid;
 	grid-template-areas:
 		"nav nav"
 		"content content"
 		"footer footer";
-}
+} 
 
 nav {
 	grid-area: nav;
@@ -19,8 +12,27 @@ nav {
 
 content {
 	grid-area: content;
+
+	display: grid;
+	grid-template-columns: 1.7fr 6fr;
 }
 
+	content .category {
+		margin-left: 10%;
+	}
+
+		.category .list {
+			margin-top: 7%;
+		}
+
+		.category a {
+			font-weight:bold
+		}
+
+	content .product {
+
+	}
+	
 footer {
 	grid-area: footer;
 }
